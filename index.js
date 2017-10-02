@@ -1,9 +1,17 @@
 const uuid = require("uuid");
-const ACTIONS_TYPES = ["WHO_IS", "I_AM", "CALL", "RETURN"].reduce((map, action) => Object.assign(map, { [action]: action }), {});
+const Coven = require("coven");
+
+const ACTIONS_TYPES = {
+  WHO_IS: "WHO_IS",
+  I_AM: "I_AM",
+  CALL: "CALL",
+  RETURN: "RETURN"
+};
 
 const call = (type, payload) => JSON.stringify({ type, payload });
 
-module.exports = coven => {
+module.exports = covenOptions => {
+  const coven = new Coven(covenOptions);
   const remoteModules = {};
   const localModules = {};
   const pendingCalls = {};
